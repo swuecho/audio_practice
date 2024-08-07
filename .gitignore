@@ -5,3 +5,5 @@ admin_backend/__pycache__
 debug.log
 staticfiles
 .env
+uploads/
+media/

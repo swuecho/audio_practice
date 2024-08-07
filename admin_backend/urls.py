@@ -122,7 +122,6 @@ urlpatterns = [
         "api/redoc/", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"
     ),
 
-    # project/urls.py
     path('api/upload/', english_audio_views.upload_audio, name='upload_audio'),
     path('api/audio-files/', english_audio_views.get_audio_files, name='get_audio_files'),
 ]

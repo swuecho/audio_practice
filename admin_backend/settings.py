@@ -172,6 +172,9 @@ STATIC_URL = "/static/"
 # https://warehouse.python.org/project/whitenoise/
 STORAGES = {
     # ...
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },

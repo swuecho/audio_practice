@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from .models import AudioFile, AudioChunk
+from django.core.files.storage import default_storage
 
 from .utils import split_audio_file
 
@@ -12,24 +13,29 @@ from .utils import split_audio_file
 @csrf_exempt
 def upload_audio(request):
     if request.method == "POST":
-        audio_file = request.FILES.get("file")
-        if audio_file:
-            audio = AudioFile.objects.create(title=audio_file.name, file=audio_file)
-            chunks = split_audio_file(audio)
-            return JsonResponse(
-                {
-                    "id": audio.id,
-                    "title": audio.title,
-                    "chunks": [
-                        {
-                            "id": chunk.id,
-                            "start": chunk.start_time,
-                            "end": chunk.end_time,
-                        }
-                        for chunk in chunks
-                    ],
-                }
-            )
+        if 'file' in request.FILES:
+            audio_file = request.FILES.get("file")
+            #saved = default_storage.save(audio_file.name, audio_file)
+            print(audio_file.name)
+            if audio_file:
+                audio = AudioFile.objects.create(title=audio_file.name, file=audio_file)
+                chunks = split_audio_file(audio)
+                return JsonResponse(
+                    {
+                        "id": audio.id,
+                        "title": audio.title,
+                        "chunks": [
+                            {
+                                "id": chunk.id,
+                                "start": chunk.start_time,
+                                "end": chunk.end_time,
+                            }
+                            for chunk in chunks
+                        ],
+                    }
+                )
+        else:
+            return JsonResponse({"error": "No file found"}, status=400)
     return JsonResponse({"error": "Invalid request"}, status=400)
 
 
