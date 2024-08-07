@@ -17,7 +17,6 @@ def split_audio_file(audio_file, chunk_length=5 * 60 * 1000):
             / "media"
             / Path(audio_file.file.path).stem
         )
-        print(chunk_dir)
         if not chunk_dir.exists():
             chunk_dir.mkdir(parents=True, exist_ok=True)
         chunk_path = str(chunk_dir / chunk_filename)

@@ -225,3 +225,6 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 INTERNAL_IPS = ["127.0.0.1", "192.168.0.97", "0.0.0.0"]
+
+MEDIA_ROOT = '/home/hwu/dev/vue-admin-serve/media'
+MEDIA_URL = '/media/'

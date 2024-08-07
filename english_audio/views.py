@@ -13,10 +13,9 @@ from .utils import split_audio_file
 @csrf_exempt
 def upload_audio(request):
     if request.method == "POST":
-        if 'file' in request.FILES:
+        if "file" in request.FILES:
             audio_file = request.FILES.get("file")
-            #saved = default_storage.save(audio_file.name, audio_file)
-            print(audio_file.name)
+            # saved = default_storage.save(audio_file.name, audio_file)
             if audio_file:
                 audio = AudioFile.objects.create(title=audio_file.name, file=audio_file)
                 chunks = split_audio_file(audio)
@@ -49,7 +48,12 @@ def get_audio_files(request):
                 "id": audio.id,
                 "title": audio.title,
                 "chunks": [
-                    {"id": chunk.id, "start": chunk.start_time, "end": chunk.end_time}
+                    {
+                        "id": chunk.id,
+                        "media": chunk.chunk_file.url.replace("/home/hwu/dev/vue-admin-serve/media", ""),
+                        "start": chunk.start_time,
+                        "end": chunk.end_time,
+                    }
                     for chunk in chunks
                 ],
             }
