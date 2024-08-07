@@ -1,0 +1,14 @@
+python3 -m django shell
+>>> import os, django
+>>> 
+>>> os.environ.setdefault("DJANGO_SETTINGS_MODULE", "admin_backend.settings")
+'admin_backend.settings'
+>>> django.setup()
+>>>
+>>> from django.contrib.auth.hashers import make_password
+>>> make_password("using555")
+'pbkdf2_sha256$600000$M2THqGFogIpDfSYQDGnUXM$GMXjXeS3UUfQdKuLx0YTquASryEcu6uo0sSssrLC7wI='
+>>> 
+
+TODO:
+username=email
