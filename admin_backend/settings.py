@@ -72,6 +72,7 @@ LOGGING = {
 
 INSTALLED_APPS = [
     "rest_framework_simplejwt",
+    "english_audio",
     "admin_backend",
     "rest_framework",
     "django_filters",

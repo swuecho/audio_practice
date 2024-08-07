@@ -1,0 +1,22 @@
+# audio_app/utils.py
+from pydub import AudioSegment
+from .models import AudioChunk
+import os
+
+def split_audio_file(audio_file, chunk_length=5*60*1000):
+    audio = AudioSegment.from_file(audio_file.file.path)
+    chunks = []
+    for i, chunk in enumerate(audio[::chunk_length]):
+        start_time = i * chunk_length / 1000
+        end_time = (i + 1) * chunk_length / 1000
+        chunk_filename = f"chunk_{i+1}.mp3"
+        chunk_path = os.path.join('chunks', chunk_filename)
+        chunk.export(chunk_path, format="mp3")
+        audio_chunk = AudioChunk.objects.create(
+            audio_file=audio_file,
+            chunk_file=chunk_path,
+            start_time=start_time,
+            end_time=end_time
+        )
+        chunks.append(audio_chunk)
+    return chunks

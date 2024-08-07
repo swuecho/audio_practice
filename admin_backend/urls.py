@@ -24,6 +24,7 @@ from admin_backend.views import MyTokenObtainPairView, SwitchRoleView
 from .swagger_view import schema_view
 from .ninja import api as ninja_api
 
+from english_audio import views as english_audio_views
 router = routers.DefaultRouter()
 router.register(r"users", views_user_role_permission.UserViewSet)
 router.register(r"roles", views_user_role_permission.RoleViewSet)
@@ -120,6 +121,10 @@ urlpatterns = [
     path(
         "api/redoc/", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"
     ),
+
+    # project/urls.py
+    path('api/upload/', english_audio_views.upload_audio, name='upload_audio'),
+    path('api/audio-files/', english_audio_views.get_audio_files, name='get_audio_files'),
 ]
 
 # urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT )
