@@ -19,7 +19,6 @@ jobs:
         node-version: '16'
 
     - name: Build Vue frontend
-      working-directory: ./web 
       run: |
         npm ci
         npm run build
