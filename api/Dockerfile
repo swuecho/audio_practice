@@ -20,7 +20,7 @@ ENV PYTHONUNBUFFERED 1
 
 
 ADD ./requirements.txt /app/requirements.txt
-RUN pip3 install -i $PYPI --trusted-host=${TRUSTED_HOST}  -r requirements.txt
+RUN pip3 install  -r requirements.txt
 
 
 # Copy the current directory contents into the container at /app
