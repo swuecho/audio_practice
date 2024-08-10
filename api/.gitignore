@@ -1,0 +1,10 @@
+__pycache__
+admin_backend/__pycache__
+.metals
+**/__pycache__
+debug.log
+staticfiles
+.env
+uploads/
+media/
+env.sh
