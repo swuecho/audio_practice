@@ -3,12 +3,14 @@
     <main class="flex-grow overflow-hidden">
       <n-card>
         <div>{{ normalChunkName(chunkFile.media) }}</div>
-          <AudioPlayerWave :audioSrc="chunkFile.media" />
-        <n-button v-if="!transcript" type="primary" @click="transcribeAudio">Transcribe</n-button>
+        <AudioPlayerWave :audioSrc="chunkFile.media" />
+        <div>
+          <n-button v-if="!transcript" type="primary" @click="transcribeAudio">Transcribe</n-button>
+        </div>
       </n-card>
       <div v-if="transcript" class="px-30 py-10">
         <h3>Transcript:</h3>
-        <div  v-html="transcript"></div>
+        <div v-html="transcript"></div>
       </div>
       <div v-if="loading">
         <n-spin></n-spin>
