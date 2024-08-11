@@ -8,13 +8,15 @@
           <n-button v-if="!transcript" type="primary" @click="transcribeAudio">Transcribe</n-button>
         </div>
       </n-card>
+      <div v-if="loading">
+        <n-spin></n-spin>
+      </div>
+
       <div v-if="transcript" class="px-30 py-10">
         <h3>Transcript:</h3>
         <div v-html="transcript"></div>
       </div>
-      <div v-if="loading">
-        <n-spin></n-spin>
-      </div>
+
     </main>
   </div>
 </template>
