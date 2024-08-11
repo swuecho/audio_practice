@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  practice_audio:
+    image: practice_audio
+    container_name: practice_audio_container
+    volumes:
+      - ./media:/app/media
+    ports:
+      - "8000:8000"  
+    environment:
+      - MEDIA_ROOT=/app/media
+      - SILICIONFLOW_API_KEY=XXXX
+      - DATABASE_URL=postgresql://user:pass@localhost:5432/db
+volumes:
+  media:
