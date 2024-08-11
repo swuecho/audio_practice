@@ -5,3 +5,5 @@ admin_backend/__pycache__
 .git
 # node mode
 polls/static_src/node_modules
+media/
+debug.log

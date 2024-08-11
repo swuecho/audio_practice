@@ -1,10 +1,9 @@
-FROM python:3.10-buster
+FROM python:3.11-buster
 
+RUN apt update
+RUN apt install -y ffmpeg
 ADD https://github.com/Yelp/dumb-init/releases/download/v1.2.5/dumb-init_1.2.5_x86_64 /usr/local/bin/dumb-init
 RUN chmod +x /usr/local/bin/dumb-init
-
-ARG PYPI
-ARG TRUSTED_HOST
 
 WORKDIR /app
 
@@ -21,7 +20,7 @@ ENV PYTHONUNBUFFERED 1
 
 ADD ./requirements.txt /app/requirements.txt
 RUN pip3 install  -r requirements.txt
-
+RUN pip install ffmpeg
 
 # Copy the current directory contents into the container at /app
 COPY . /app
