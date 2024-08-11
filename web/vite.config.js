@@ -16,7 +16,6 @@ import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
 import simpleHtmlPlugin from 'vite-plugin-simple-html'
 import removeNoMatch from 'vite-plugin-router-warn'
 import { pluginPagePathes, pluginIcons } from './build/plugin-isme'
-import { cloudflareRedirect } from 'vite-plugin-cloudflare-redirect'
 
 
 export default defineConfig(({ command, mode }) => {
@@ -45,7 +44,6 @@ export default defineConfig(({ command, mode }) => {
           },
         },
       }),
-      cloudflareRedirect(),
       // 自定义插件，用于生成页面文件的path，并添加到虚拟模块
       pluginPagePathes(),
       // 自定义插件，用于生成自定义icon，并添加到虚拟模块

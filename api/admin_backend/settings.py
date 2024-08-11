@@ -29,14 +29,7 @@ SECRET_KEY = "django-insecure-bpaxl6*dp_c(&e31k-vux-8@&tk2=!wsjvq=5z*a!pn0m#7%p)
 DEBUG = int(os.environ.get("DEBUG", "0"))
 
 ALLOWED_HOSTS = [
-    "192.168.0.94",
-    "192.168.0.97",
-    "192.168.0.155",
-    "127.0.0.1",
-    "0.0.0.0",
-    "192.227.196.212",
-    "www.bestqa.net",
-    "localhost",
+    "*",
 ]
 
 # logging
