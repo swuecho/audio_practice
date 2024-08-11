@@ -42,21 +42,22 @@ def get_audio_files(request):
     data = []
     for audio in audio_files:
         chunks = audio.chunks.all().order_by("start_time")
-        data.append(
-            {
-                "id": audio.id,
-                "title": audio.title,
-                "chunks": [
-                    {
-                        "id": chunk.id,
-                        "media": chunk.chunk_file.url,
-                        "start": chunk.start_time,
-                        "end": chunk.end_time,
-                    }
-                    for chunk in chunks
-                ],
-            }
-        )
+        if chunks:
+            data.append(
+                {
+                    "id": audio.id,
+                    "title": audio.title,
+                    "chunks": [
+                        {
+                            "id": chunk.id,
+                            "media": chunk.chunk_file.url,
+                            "start": chunk.start_time,
+                            "end": chunk.end_time,
+                        }
+                        for chunk in chunks
+                    ],
+                }
+            )
     return JsonResponse(data, safe=False)
 
 
