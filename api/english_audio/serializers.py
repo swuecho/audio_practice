@@ -6,3 +6,4 @@ class AudioNoteSerializer(serializers.ModelSerializer):
         model = AudioNote
         fields = ['id', 'chunk', 'text', 'created_at', 'updated_at']
         read_only_fields = ['created_at', 'updated_at']
+        ordering = ['-created_at']

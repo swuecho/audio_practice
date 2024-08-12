@@ -25,12 +25,14 @@ from .swagger_view import schema_view
 from .ninja import api as ninja_api
 
 from english_audio import views as english_audio_views
+from english_audio.rest_views import AudioNoteViewSet
 
 router = routers.DefaultRouter()
 router.register(r"users", views_user_role_permission.UserViewSet)
 router.register(r"roles", views_user_role_permission.RoleViewSet)
 router.register(r"permissions", views_user_role_permission.PermissionViewSet)
 router.register(r"profiles", views_user_role_permission.ProfileViewSet)
+router.register(r"audio-notes", AudioNoteViewSet)
 # router.register(r"inventory_group", views.InventoryGroupList)
 
 # Wire up our API using automatic URL routing.

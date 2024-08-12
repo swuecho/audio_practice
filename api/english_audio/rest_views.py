@@ -3,6 +3,7 @@ from .models import AudioNote
 from .serializers import AudioNoteSerializer
 from rest_framework.permissions import IsAuthenticated
 
+
 class AudioNoteViewSet(viewsets.ModelViewSet):
     queryset = AudioNote.objects.all()
     serializer_class = AudioNoteSerializer

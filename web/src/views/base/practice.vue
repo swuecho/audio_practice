@@ -22,7 +22,7 @@
 
         <div class="flex-1">
           <h3>Note:</h3>
-          <tiptap-editor />
+          <tiptap-editor :audio-chunk-id="chunkId" />
         </div>
       </div>
 
