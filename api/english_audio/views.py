@@ -122,3 +122,5 @@ def delete_transcript(request, chunk_id):
         return JsonResponse({"message": "Transcript deleted successfully"}, status=200)
     except AudioTranscript.DoesNotExist:
         return JsonResponse({"error": "Transcript not found"}, status=404)
+
+

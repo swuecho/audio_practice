@@ -217,9 +217,9 @@ AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
 ]
 
-INTERNAL_IPS = ["127.0.0.1", "192.168.0.97", "0.0.0.0"]
+INTERNAL_IPS = ["127.0.0.1", "192.168.0.136", "0.0.0.0"]
 
-MEDIA_ROOT = os.environ.get('MEDIA_ROOT','/home/hwu/dev/practice_audio/api/media')
+MEDIA_ROOT = os.environ.get('MEDIA_ROOT','/home/hwu/dev/practice_audio/api/media/')
 MEDIA_URL = '/media/'
 
 SILICIONFLOW_API_KEY = os.environ.get('SILICIONFLOW_API_KEY')

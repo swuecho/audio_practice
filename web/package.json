@@ -11,6 +11,9 @@
     "lint:fix": "eslint --fix --ext .js,.vue ."
   },
   "dependencies": {
+    "@tiptap/pm": "^2.5.9",
+    "@tiptap/starter-kit": "^2.5.9",
+    "@tiptap/vue-3": "^2.5.9",
     "@vueuse/core": "^10.9.0",
     "axios": "^1.6.7",
     "dayjs": "^1.11.10",

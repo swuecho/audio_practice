@@ -8,14 +8,24 @@
           <n-button v-if="!transcript" type="primary" @click="transcribeAudio">Transcribe</n-button>
         </div>
       </n-card>
-      <div v-if="loading">
-        <n-spin></n-spin>
+      <div class="px-30 py-10 flex">
+        <div class="flex-1">
+          <div v-if="loading">
+            <n-spin></n-spin>
+          </div>
+
+          <div v-if="transcript" class="px-30 py-10">
+            <h3>Transcript:</h3>
+            <div v-html="transcript"></div>
+          </div>
+        </div>
+
+        <div class="flex-1">
+          <h3>Note:</h3>
+          <tiptap-editor />
+        </div>
       </div>
 
-      <div v-if="transcript" class="px-30 py-10">
-        <h3>Transcript:</h3>
-        <div v-html="transcript"></div>
-      </div>
 
     </main>
   </div>
@@ -24,7 +34,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import AudioPlayerWave from './components/AudioPlayerWave.vue';
-import AudioPlayerClaude from './components/AudioPlayerClaude.vue';
+import TiptapEditor from './components/TiptapEditor.vue'
 import api from './services/api';
 const route = useRoute()
 const chunkId = route.params.id
