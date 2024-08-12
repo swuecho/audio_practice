@@ -24,7 +24,7 @@ const audioFiles = ref([]);
 
 const fetchAudioFiles = async () => {
   const response = await api.getAudioFiles();
-  audioFiles.value = response.data;
+  audioFiles.value = response;
 };
 
 const refreshAudioFiles = () => {

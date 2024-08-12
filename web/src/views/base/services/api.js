@@ -1,12 +1,9 @@
-import axios from 'axios';
-
-const API_URL = '/api';
-
+import { request } from "@/utils"
 export default {
         uploadAudio(file) {
                 const formData = new FormData();
                 formData.append('file', file);
-                return axios.post(`${API_URL}/upload/`, formData, {
+                return request.post(`/upload/`, formData, {
                         headers: {
                                 'Content-Type': 'multipart/form-data'
                         }
@@ -14,13 +11,13 @@ export default {
                 );
         },
         getAudioFiles() {
-                return axios.get(`${API_URL}/audio-files/`);
+                return request.get(`/audio-files/`);
         },
         getAudioChunk(id) {
-                return axios.get(`${API_URL}/audio/chunk/${id}/`)
+                return request.get(`/audio/chunk/${id}/`)
         },
 
         async audioChunkTranscript(id) {
-                return axios.post(`${API_URL}/audio/chunk/transcript/${id}/`)
+                return request.post(`${API_URL}/audio/chunk/transcript/${id}/`)
         }
 };

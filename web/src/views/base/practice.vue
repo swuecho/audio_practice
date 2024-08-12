@@ -47,7 +47,7 @@ const loading = ref(false)
 
 const fetchAudioChunk = async (chunkId) => {
   const response = await api.getAudioChunk(chunkId);
-  chunkFile.value = response.data;
+  chunkFile.value = response;
   transcript.value = chunkFile.value.transcript;
 };
 
@@ -66,7 +66,7 @@ const transcribeAudio = async () => {
     loading.value = true
     const response = await api.audioChunkTranscript(chunkId);
     console.log(response)
-    transcript.value = response.data.text;
+    transcript.value = response.text;
   } catch (error) {
     console.error('Error during transcription:', error);
   } finally {
