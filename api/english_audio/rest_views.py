@@ -13,4 +13,4 @@ class AudioNoteViewSet(viewsets.ModelViewSet):
         serializer.save(user=self.request.user)
 
     def get_queryset(self):
-        return AudioNote.objects.filter(chunk__user=self.request.user)
+        return AudioNote.objects.filter(user=self.request.user)

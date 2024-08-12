@@ -8,19 +8,19 @@
           <n-button v-if="!transcript" type="primary" @click="transcribeAudio">Transcribe</n-button>
         </div>
       </n-card>
-      <div class="px-30 py-10 flex">
-        <div class="flex-1">
+      <div class="container">
+        <div class="content-section">
           <div v-if="loading">
             <n-spin></n-spin>
           </div>
 
-          <div v-if="transcript" class="px-30 py-10">
+          <div v-if="transcript" class="transcript-content">
             <h3>Transcript:</h3>
             <div v-html="transcript"></div>
           </div>
         </div>
 
-        <div class="flex-1">
+        <div class="editor-section">
           <h3>Note:</h3>
           <tiptap-editor :audio-chunk-id="chunkId" />
         </div>
@@ -74,3 +74,24 @@ const transcribeAudio = async () => {
   }
 };
 </script>
+
+<style lang="scss">
+.container {
+  display: flex;
+  gap: 20px;
+  height: calc(100vh - 250px);
+}
+
+.editor-section, .content-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.transcript-content {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 0 30px 10px;
+}
+
+</style>

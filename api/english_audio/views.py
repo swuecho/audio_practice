@@ -68,6 +68,8 @@ def get_chunk(request, chunk_id):
             "id": chunk.id,
             "media": chunk.chunk_file.url,
             "transcript": chunk.transcript.text if hasattr(chunk, 'transcript') else None,
+            "note_id": chunk.note.id if hasattr(chunk, 'note') else None,
+            "note_content": chunk.note.text if hasattr(chunk, 'note') else None,
             "start": chunk.start_time,
             "end": chunk.end_time,
         }
