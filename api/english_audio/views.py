@@ -16,8 +16,8 @@ def upload_audio(request):
             audio_file = request.FILES.get("file")
             # saved = default_storage.save(audio_file.name, audio_file)
             if audio_file:
-                audio = AudioFile.objects.create(title=audio_file.name, file=audio_file)
-                chunks = split_audio_file(audio)
+                audio = AudioFile.objects.create(title=audio_file.name, file=audio_file, user=request.user)
+                chunks = split_audio_file(audio, user=request.user)
                 return JsonResponse(
                     {
                         "id": audio.id,
@@ -38,7 +38,7 @@ def upload_audio(request):
 
 
 def get_audio_files(request):
-    audio_files = AudioFile.objects.all().order_by("-uploaded_at")
+    audio_files = AudioFile.objects.filter(user=request.user).order_by("-uploaded_at")
     data = []
     for audio in audio_files:
         chunks = audio.chunks.all().order_by("start_time")
@@ -107,7 +107,7 @@ def audio_transcript(request, chunk_id):
     if response.status_code == 200:
         response_json = response.json()
         text = response_json["text"]
-        AudioTranscript.objects.create(chunk=chunk, text=text)
+        AudioTranscript.objects.create(chunk=chunk, text=text, user=request.user)
         return JsonResponse(response_json)
     else:
         return JsonResponse(response.text, status=response.status_code, safe=False)

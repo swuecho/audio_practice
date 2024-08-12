@@ -4,7 +4,7 @@ from .models import AudioChunk
 from pathlib import Path
 
 
-def split_audio_file(audio_file, chunk_length=5 * 60 * 1000):
+def split_audio_file(audio_file, user, chunk_length=5 * 60 * 1000):
     audio_file_path = audio_file.file.path
     audio = AudioSegment.from_file(audio_file_path)
     chunks = []
@@ -24,6 +24,7 @@ def split_audio_file(audio_file, chunk_length=5 * 60 * 1000):
             chunk_file=f"chunks/{chunk_dir.name}/{chunk_filename}",
             start_time=start_time,
             end_time=end_time,
+            user=user,
         )
         chunks.append(audio_chunk)
     return chunks
