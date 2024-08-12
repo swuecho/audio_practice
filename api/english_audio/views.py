@@ -78,7 +78,7 @@ def get_chunk(request, chunk_id):
     )
 
 
-@api_view()
+@api_view(['POST'])
 def audio_transcript(request, chunk_id):
     url = "https://api.siliconflow.cn/v1/audio/transcriptions"
     chunk: AudioChunk = AudioChunk.objects.get(id=chunk_id)

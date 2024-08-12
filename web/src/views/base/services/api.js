@@ -18,6 +18,6 @@ export default {
         },
 
         async audioChunkTranscript(id) {
-                return request.post(`${API_URL}/audio/chunk/transcript/${id}/`)
+                return request.post(`/audio/chunk/transcript/${id}/`)
         }
 };
