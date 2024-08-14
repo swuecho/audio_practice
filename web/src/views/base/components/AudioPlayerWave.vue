@@ -3,7 +3,6 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
 import { AVWaveform } from 'vue-audio-visual'
 
 const props = defineProps({

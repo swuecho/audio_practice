@@ -25,11 +25,13 @@
                                                                         </h2>
                                                                 </router-link>
                                                         </div>
+                                                      
 
                                                 </div>
                                                 <div>
                                                         <AudioPlayer :chunk-media="chunk.media" />
                                                 </div>
+                                                <div v-html="chunk.note"></div>
                                         </n-card>
 
                                 </div>

@@ -52,6 +52,11 @@ def get_audio_files(request):
                             "media": chunk.chunk_file.url,
                             "start": chunk.start_time,
                             "end": chunk.end_time,
+                            "note": (
+                                chunk.note.text
+                                if hasattr(chunk, "note")
+                                else None
+                            ),
                         }
                         for chunk in chunks
                     ],
@@ -78,7 +83,7 @@ def get_chunk(request, chunk_id):
     )
 
 
-@api_view(['POST'])
+@api_view(["POST"])
 def audio_transcript(request, chunk_id):
     url = "https://api.siliconflow.cn/v1/audio/transcriptions"
     chunk: AudioChunk = AudioChunk.objects.get(id=chunk_id)
