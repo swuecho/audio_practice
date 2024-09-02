@@ -33,7 +33,6 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import AudioPlayerWave from './components/AudioPlayerWave.vue';
 import TiptapEditor from './components/TiptapEditor.vue'
 import api from './services/api';
 const route = useRoute()
