@@ -26,6 +26,10 @@ export default defineConfig(({ command, mode }) => {
   console.log(VITE_PROXY_TARGET)
   return {
     base: VITE_PUBLIC_PATH || '/',
+    build: {
+      outDir: '../api/staticfiles',
+      emptyOutDir: true, // also necessary
+    },
     plugins: [
       Vue(),
       svgLoader(),
@@ -106,9 +110,6 @@ export default defineConfig(({ command, mode }) => {
           secure: false,
         }
       },
-    },
-    build: {
-      chunkSizeWarningLimit: 1024, // chunk 大小警告的限制（单位kb）
     },
   }
 })
