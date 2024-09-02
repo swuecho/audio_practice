@@ -4,52 +4,63 @@
                         <button :disabled="!editor.can().chain().focus().toggleBold().run()"
                                 class="m-1 inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-md font-medium text-indigo-700 ring-1 ring-inset ring-indigo-700/10"
                                 :class="{ 'ring-indigo-900 ring-2': editor.isActive('bold') }"
-                                @click="editor.chain().focus().toggleBold().run()" v-text="'bold'" />
+                                @click="editor.chain().focus().toggleBold().run()">
+                                <Icon name='bold' />
+                        </button>
                         <button :disabled="!editor.can().chain().focus().toggleItalic().run()"
                                 class="m-1 inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-md font-medium text-indigo-700 ring-1 ring-inset ring-indigo-700/10"
                                 :class="{ 'ring-indigo-900 ring-2': editor.isActive('italic') }"
-                                @click="editor.chain().focus().toggleItalic().run()" v-text="'italic'" />
+                                @click="editor.chain().focus().toggleItalic().run()">
+                                <Icon name='italic' />
+                        </button>
                         <button :disabled="!editor.can().chain().focus().toggleStrike().run()"
                                 class="m-1 inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-md font-medium text-indigo-700 ring-1 ring-inset ring-indigo-700/10"
                                 :class="{ 'ring-indigo-900 ring-2': editor.isActive('strike') }"
-                                @click="editor.chain().focus().toggleStrike().run()" v-text="'strike'" />
-                        <button class="m-1 inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-md font-medium text-indigo-700 ring-1 ring-inset ring-indigo-700/10"
-                                :class="{ 'ring-indigo-900 ring-2': editor.isActive('paragraph') }"
-                                @click="editor.chain().focus().setParagraph().run()" v-text="'paragraph'" />
-                        <button class="m-1 inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-md font-medium text-indigo-700 ring-1 ring-inset ring-indigo-700/10"
-                                :class="{ 'ring-indigo-900 ring-2': editor.isActive('heading', { level: 1 }) }"
-                                @click="editor.chain().focus().toggleHeading({ level: 1 }).run()" v-text="'h1'" />
+                                @click="editor.chain().focus().toggleStrike().run()">
+                                <Icon name='strikethrough' />
+                        </button>
+                        <button :disabled="!editor.can().chain().focus().toggleHighlight().run()"
+                                class="m-1 inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-md font-medium text-indigo-700 ring-1 ring-inset ring-indigo-700/10"
+                                :class="{ 'ring-indigo-900 ring-2': editor.isActive('highlight') }"
+                                @click="editor.chain().focus().toggleHighlight().run()">
+                                <Icon name='highlight' />
+                        </button>
+
+
                         <button class="m-1 inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-md font-medium text-indigo-700 ring-1 ring-inset ring-indigo-700/10"
                                 :class="{ 'ring-indigo-900 ring-2': editor.isActive('heading', { level: 2 }) }"
-                                @click="editor.chain().focus().toggleHeading({ level: 2 }).run()" v-text="'h2'" />
-                        <button class="m-1 inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-md font-medium text-indigo-700 ring-1 ring-inset ring-indigo-700/10"
-                                :class="{ 'ring-indigo-900 ring-2': editor.isActive('heading', { level: 3 }) }"
-                                @click="editor.chain().focus().toggleHeading({ level: 3 }).run()" v-text="'h3'" />
+                                @click="editor.chain().focus().toggleHeading({ level: 2 }).run()">
+                                <Icon name='heading' />
+                        </button>
                         <button class="m-1 inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-md font-medium text-indigo-700 ring-1 ring-inset ring-indigo-700/10"
                                 :class="{ 'ring-indigo-900 ring-2': editor.isActive('bulletList') }"
-                                @click="editor.chain().focus().toggleBulletList().run()" v-text="'bullet list'" />
-                        <button class="m-1 inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-md font-medium text-indigo-700 ring-1 ring-inset ring-indigo-700/10"
-                                :class="{ 'ring-indigo-900 ring-2': editor.isActive('orderedList') }"
-                                @click="editor.chain().focus().toggleOrderedList().run()" v-text="'ordered list'" />
+                                @click="editor.chain().focus().toggleBulletList().run()">
+                                <Icon name='list-ul' />
+                        </button>
+
                         <button class="m-1 inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-md font-medium text-indigo-700 ring-1 ring-inset ring-indigo-700/10"
                                 :class="{ 'ring-indigo-900 ring-2': editor.isActive('blockquote') }"
-                                @click="editor.chain().focus().toggleBlockquote().run()" v-text="'blockquote'" />
+                                @click="editor.chain().focus().toggleBlockquote().run()">
+                                <Icon name='indent' />
+                        </button>
+
                         <button class="m-1 inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-md font-medium text-indigo-700 ring-1 ring-inset ring-indigo-700/10"
-                                @click="editor.chain().focus().setHorizontalRule().run()" v-text="'horizontal rule'" />
-                        <button class="m-1 inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-md font-medium text-indigo-700 ring-1 ring-inset ring-indigo-700/10"
-                                @click="editor.chain().focus().setHardBreak().run()" v-text="'hard break'" />
-                        <button class="m-1 inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-md font-medium text-indigo-700 ring-1 ring-inset ring-indigo-700/10"
+                                @click="editor.chain().focus().setHorizontalRule().run()">
+                                <Icon name='horizontal-rule' />
+                        </button>
+
+                        <button class="m-1 inline-flex items-center rounded-md  bg-indigo-50 px-2 py-1 text-md font-medium text-indigo-700 ring-1 ring-inset ring-indigo-700/10"
                                 :disabled="!editor.can().chain().focus().undo().run()"
                                 @click="editor.chain().focus().undo().run()">
-                                <i class="i-fe:corner-up-left" />
+                                <icon name="undo"></icon>
                         </button>
-                        <button class="m-1 inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-md font-medium text-indigo-700 ring-1 ring-inset ring-indigo-700/10"
+                        <button class="m-1 inline-flex items-center rounded-md  bg-indigo-50 px-2 py-1 text-md font-medium  text-indigo-700 ring-1 ring-inset ring-indigo-700/10"
                                 :disabled="!editor.can().chain().focus().redo().run()"
                                 @click="editor.chain().focus().redo().run()">
-                                <i class="i-fe:corner-down-right" />
+                                <icon name="redo"></icon>
                         </button>
                 </div>
-                <editor-content :editor="editor" />
+                <editor-content :editor="editor" class="editor-content" />
                 <p v-if="saving">Saving...</p>
                 <p v-if="error" class="error">{{ error }}</p>
         </div>
@@ -62,6 +73,7 @@ import StarterKit from '@tiptap/starter-kit'
 import Highlight from '@tiptap/extension-highlight'
 import Typography from '@tiptap/extension-typography'
 import { request } from '@/utils'
+import Icon from './Icon.vue';
 
 import { debounce } from 'lodash'
 
@@ -133,6 +145,10 @@ onBeforeUnmount(() => {
 </script>
 
 <style lang="scss">
+.editor-content {
+        border-bottom: 1px solid #e2e8f0;
+}
+
 /* Basic editor styles */
 .tiptap {
         :first-child {
@@ -227,8 +243,20 @@ onBeforeUnmount(() => {
 
         hr {
                 border: none;
-                border-top: 1px solid var(--gray-2);
-                margin: 2rem 0;
+                border-top: 3px double #333;
+                color: #333;
+                overflow: visible;
+                text-align: center;
+                height: 5px;
         }
+
+        hr::after {
+                background: #fff;
+                content: '§';
+                padding: 0 4px;
+                position: relative;
+                top: -13px;
+        }
+
 }
 </style>
