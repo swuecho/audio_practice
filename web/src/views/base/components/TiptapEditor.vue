@@ -55,7 +55,7 @@
                                 <icon name="redo"></icon>
                         </button>
                 </div>
-                <editor-content :editor="editor" />
+                <editor-content :editor="editor" class="editor-content"/>
                 <p v-if="saving">Saving...</p>
                 <p v-if="error" class="error">{{ error }}</p>
         </div>
@@ -140,6 +140,9 @@ onBeforeUnmount(() => {
 </script>
 
 <style lang="scss">
+.editor-content {
+        border-bottom: 1px solid #e2e8f0;
+}
 /* Basic editor styles */
 .tiptap {
         :first-child {
