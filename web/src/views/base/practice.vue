@@ -3,7 +3,7 @@
     <main class="flex-grow overflow-hidden">
       <n-card>
         <div>{{ normalChunkName(chunkFile.media) }}</div>
-        <AudioPlayerWave :audioSrc="chunkFile.media" />
+        <AudioPlayer :audioSrc="audioSrc" />
         <div>
           <n-button v-if="!transcript" type="primary" @click="transcribeAudio">Transcribe</n-button>
         </div>
@@ -33,7 +33,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import AudioPlayerWave from './components/AudioPlayerWave.vue';
+import AudioPlayer from '@/components/AudioPlayer.vue';
 import TiptapEditor from './components/TiptapEditor.vue'
 import api from './services/api';
 const route = useRoute()
@@ -41,13 +41,14 @@ const chunkId = route.params.id
 const chunkFile = ref({
   media: ''
 });
-
+const audioSrc = ref('')
 const transcript = ref('')
 const loading = ref(false)
 
 const fetchAudioChunk = async (chunkId) => {
   const response = await api.getAudioChunk(chunkId);
   chunkFile.value = response;
+  audioSrc.value = `${window.location.origin}${chunkFile.value.media}`
   transcript.value = chunkFile.value.transcript;
 };
 

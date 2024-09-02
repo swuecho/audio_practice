@@ -78,7 +78,7 @@ import Icon from './Icon.vue';
 import { debounce } from 'lodash'
 
 const props = defineProps<{
-        audioChunkId: number
+        audioChunkId: number | string
 }>()
 
 const editor = ref<Editor | null>(null)
