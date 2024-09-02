@@ -26,7 +26,7 @@
                                 <Icon name='highlight' />
                         </button>
 
-                       
+
                         <button class="m-1 inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-md font-medium text-indigo-700 ring-1 ring-inset ring-indigo-700/10"
                                 :class="{ 'ring-indigo-900 ring-2': editor.isActive('heading', { level: 2 }) }"
                                 @click="editor.chain().focus().toggleHeading({ level: 2 }).run()">
@@ -43,7 +43,12 @@
                                 @click="editor.chain().focus().toggleBlockquote().run()">
                                 <Icon name='indent' />
                         </button>
-                       
+
+                        <button class="m-1 inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-md font-medium text-indigo-700 ring-1 ring-inset ring-indigo-700/10"
+                                @click="editor.chain().focus().setHorizontalRule().run()">
+                                <Icon name='horizontal-rule' />
+                        </button>
+
                         <button class="m-1 inline-flex items-center rounded-md  bg-indigo-50 px-2 py-1 text-md font-medium text-indigo-700 ring-1 ring-inset ring-indigo-700/10"
                                 :disabled="!editor.can().chain().focus().undo().run()"
                                 @click="editor.chain().focus().undo().run()">
@@ -55,7 +60,7 @@
                                 <icon name="redo"></icon>
                         </button>
                 </div>
-                <editor-content :editor="editor" class="editor-content"/>
+                <editor-content :editor="editor" class="editor-content" />
                 <p v-if="saving">Saving...</p>
                 <p v-if="error" class="error">{{ error }}</p>
         </div>
@@ -143,6 +148,7 @@ onBeforeUnmount(() => {
 .editor-content {
         border-bottom: 1px solid #e2e8f0;
 }
+
 /* Basic editor styles */
 .tiptap {
         :first-child {
@@ -237,8 +243,20 @@ onBeforeUnmount(() => {
 
         hr {
                 border: none;
-                border-top: 1px solid var(--gray-2);
-                margin: 2rem 0;
+                border-top: 3px double #333;
+                color: #333;
+                overflow: visible;
+                text-align: center;
+                height: 5px;
         }
+
+        hr::after {
+                background: #fff;
+                content: '§';
+                padding: 0 4px;
+                position: relative;
+                top: -13px;
+        }
+
 }
 </style>
