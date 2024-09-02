@@ -1,9 +1,13 @@
 <template>
-        <AVWaveform :src="audioSrc" :playtime-with-ms="false"  crossorigin="anonymous"></AVWaveform>
+        <div>
+                <audio ref="player" :src="audioSrc" controls />
+                <canvas ref="canvas" />
+        </div>
 </template>
 
-<script setup>
-import { AVWaveform } from 'vue-audio-visual'
+<script setup lang="ts">
+import { ref } from 'vue'
+import { useAVWaveform } from 'vue-audio-visual'
 
 const props = defineProps({
         audioSrc: {
@@ -12,5 +16,8 @@ const props = defineProps({
         }
 });
 
+const player = ref(null)
+const canvas = ref(null)
 
+useAVWaveform(player, canvas, { src: props.audioSrc, playtimeWithMs: false })
 </script>
