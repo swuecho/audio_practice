@@ -15,6 +15,7 @@ import Components from 'unplugin-vue-components/vite'
 import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
 import simpleHtmlPlugin from 'vite-plugin-simple-html'
 import removeNoMatch from 'vite-plugin-router-warn'
+import svgLoader from 'vite-svg-loader';
 import { pluginPagePathes, pluginIcons } from './build/plugin-isme'
 
 
@@ -27,6 +28,7 @@ export default defineConfig(({ command, mode }) => {
     base: VITE_PUBLIC_PATH || '/',
     plugins: [
       Vue(),
+      svgLoader(),
       Unocss(),
       AutoImport({
         imports: ['vue', 'vue-router'],
