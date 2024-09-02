@@ -1,4 +1,4 @@
-version=0.1.25
+version=0.1.26
 local_registry=192.168.0.100:5555
 aliyun_registry_bestqa=registry.cn-shanghai.aliyuncs.com/bestqa
 github_pkg_registry_surveyresearch=docker.pkg.github.com/swuecho/surveyresearch
@@ -6,9 +6,7 @@ github_pkg_registry_surveyresearch=docker.pkg.github.com/swuecho/surveyresearch
 static:
 	rm -rf staticfiles
 	mkdir staticfiles
-	# cp -rf templates/components staticfiles/components
 	python manage.py collectstatic --noinput
-	cp -rf  ../web/dist/* staticfiles
 dev:
 	echo $DEBUG
 	echo $DATABASE_URL
