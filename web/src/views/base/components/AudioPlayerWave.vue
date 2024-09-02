@@ -1,5 +1,5 @@
 <template>
-        <AVWaveform :src="audioSrc" :playtime-with-ms="false"></AVWaveform>
+        <AVWaveform :src="audioSrc" :playtime-with-ms="false"  crossorigin="anonymous"></AVWaveform>
 </template>
 
 <script setup>
