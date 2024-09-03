@@ -57,7 +57,7 @@ jobs:
         context: ./api 
         file: ./api/Dockerfile  
         push: true
-        tags: ${GITHUB_REF#refs/tags/}
+        tags: audio_practice:${GITHUB_REF#refs/tags/}
         secrets: |
             GIT_AUTH_TOKEN=${{ secrets.GHCR_TOKEN }}
 
