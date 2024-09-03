@@ -12,7 +12,7 @@ export const basicRoutes = [
   {
     name: 'Home',
     path: '/',
-    component: () => import('@/views/base/audio_spliter.vue'),
+    component: () => import('@/views/base/audio.vue'),
     meta: {
       title: '首页',
     },
