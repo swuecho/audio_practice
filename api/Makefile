@@ -17,7 +17,7 @@ dev:
 serve:
 	echo $DEBUG
 	echo $DATABASE_URL
-	gunicorn --bind 0.0.0.0:8001 --workers 2 admin_backend.wsgi:application
+	gunicorn --bind 0.0.0.0:8001 --workers 2 practice_audio.wsgi:application
 
 
 tag:
@@ -25,13 +25,13 @@ tag:
 	git push origin tag release-v$(version)
 
 build: static
-	docker build  -t $(local_registry)/admin_backend:$(version) -f Dockerfile .
+	docker build  -t $(local_registry)/practice_audio:$(version) -f Dockerfile .
 push:
-	docker push $(local_registry)/admin_backend:$(version)
+	docker push $(local_registry)/practice_audio:$(version)
 
 push_aliyun:
-	docker tag  $(local_registry)/admin_backend:$(version) $(aliyun_registry_bestqa)/admin_backend:$(version)
-	docker push $(aliyun_registry_bestqa)/admin_backend:$(version)
+	docker tag  $(local_registry)/practice_audio:$(version) $(aliyun_registry_bestqa)/practice_audio:$(version)
+	docker push $(aliyun_registry_bestqa)/practice_audio:$(version)
 
 init:
 	python manage.py migrate
