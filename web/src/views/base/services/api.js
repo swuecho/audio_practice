@@ -1,8 +1,8 @@
 import { request } from "@/utils"
 export default {
-        uploadAudio(file) {
+        uploadAudio(file, fileName) {
                 const formData = new FormData();
-                formData.append('file', file);
+                formData.append('file', file, fileName);
                 return request.post(`/upload/`, formData, {
                         headers: {
                                 'Content-Type': 'multipart/form-data'
