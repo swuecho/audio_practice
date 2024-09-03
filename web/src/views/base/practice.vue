@@ -8,7 +8,7 @@
           <n-button v-if="!transcript" type="primary" @click="transcribeAudio">Transcribe</n-button>
         </div>
       </n-card>
-      <div class="container">
+      <div class="container h-full">
         <div class="content-section">
           <div v-if="loading">
             <n-spin></n-spin>
@@ -20,7 +20,7 @@
           </div>
         </div>
 
-        <div class="editor-section">
+        <div class="editor-section h-full overflow-y-auto">
           <h3>Note:</h3>
           <tiptap-editor :audio-chunk-id="chunkId" />
         </div>
