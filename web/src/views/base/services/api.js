@@ -13,6 +13,9 @@ export default {
         getAudioFiles() {
                 return request.get(`/audio-files/`);
         },
+        deleteAudioFile(fileId) {
+                request.delete(`/audio/file/${fileId}`)
+        },
         getAudioChunk(id) {
                 return request.get(`/audio/chunk/${id}/`)
         },
