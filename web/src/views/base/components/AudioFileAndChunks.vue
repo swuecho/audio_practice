@@ -1,7 +1,7 @@
 <template>
         <n-thing :title="audioFile.title">
                 <template #header-extra>
-                        <n-button @click="deleteAudioFile" size="small" class="mr-2">
+                        <n-button @click="confirmDelete" size="small" class="mr-2">
                                 <i class="i-fe:trash"></i>
                         </n-button>
                         <n-button @click="toggleCollapse" size="small">
@@ -47,6 +47,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useDialog } from 'naive-ui'
 import AudioPlayer from './AudioPlayer.vue';
 import api from '../services/api';
 
@@ -75,6 +76,20 @@ const formatTime = (seconds) => {
         const remainingSeconds = Math.floor(seconds % 60);
         return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
 };
+
+const dialog = useDialog()
+
+const confirmDelete = () => {
+        dialog.warning({
+                title: 'Confirm Deletion',
+                content: `Are you sure you want to delete "${props.audioFile.title}"?`,
+                positiveText: 'Delete',
+                negativeText: 'Cancel',
+                onPositiveClick: () => {
+                        deleteAudioFile()
+                }
+        })
+}
 
 const deleteAudioFile = () => {
         console.log('Delete audio file:', props.audioFile.id);
