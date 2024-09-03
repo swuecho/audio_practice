@@ -3,7 +3,7 @@
                 <h2>Uploaded Audio Files</h2>
                 <n-list>
                         <n-list-item v-for="file in audioFiles" :key="file.id">
-                              <AudioFileAndChunks :audio-file="file">  </AudioFileAndChunks>
+                              <AudioFileAndChunks :audio-file="file"  @file-deleted="onFileDeleted">  </AudioFileAndChunks>
                         </n-list-item>
                 </n-list>
         </div>
@@ -19,5 +19,11 @@ const props = defineProps({
         }
 });
 
+const emit = defineEmits(['file-deleted']);
+
+const onFileDeleted = () => {
+        console.log('file deleted emited from AudioFileList')
+  emit('file-deleted');
+};
 
 </script>

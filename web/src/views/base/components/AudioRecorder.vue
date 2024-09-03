@@ -30,6 +30,8 @@ const errorMessage = ref('');
 let mediaRecorder = null;
 let audioChunks = [];
 
+const emit = defineEmits(['recording-uploaded']);
+
 const checkBrowserSupport = () => {
         if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
                 throw new Error('Media devices API not supported in this browser.');
@@ -116,7 +118,6 @@ const handleError = (error) => {
         }
 };
 
-const emit = defineEmits(['recording-uploaded']);
 
 onMounted(() => {
         // Check if permission is already granted
