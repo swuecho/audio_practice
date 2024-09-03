@@ -50,14 +50,16 @@ jobs:
       uses: docker/setup-buildx-action@v1
 
     - name: Build practice_audio image
-        run: |
-          docker build . --file Dockerfile -t ghcr.io/swuecho/practice_audio:${GITHUB_REF#refs/tags/}
-        working-directory: api
+      run: |
+        docker build . --file Dockerfile -t ghcr.io/swuecho/practice_audio:${GITHUB_REF#refs/tags/}
+      working-directory: api
+
     - name: Login to GitHub Container Registry
-        run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+      run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
     - name: Push API image to GitHub Container Registry
-        run: |
-          docker push ghcr.io/swuecho/practice_audio:${GITHUB_REF#refs/tags/}
-          docker tag ghcr.io/swuecho/practice_audio:${GITHUB_REF#refs/tags/} ghcr.io/swuecho/practice_audio:latest
-          docker push  ghcr.io/swuecho/practice_audio:latest
+      run: |
+        docker push ghcr.io/swuecho/practice_audio:${GITHUB_REF#refs/tags/}
+        docker tag ghcr.io/swuecho/practice_audio:${GITHUB_REF#refs/tags/} ghcr.io/swuecho/practice_audio:latest
+        docker push  ghcr.io/swuecho/practice_audio:latest
 
