@@ -91,9 +91,9 @@ const confirmDelete = () => {
         })
 }
 
-const deleteAudioFile = () => {
+const deleteAudioFile = async () => {
         console.log('Delete audio file:', props.audioFile.id);
-        api.deleteAudioFile(props.audioFile.id)
+        await api.deleteAudioFile(props.audioFile.id)
         console.log('file deleted')
         emit('file-deleted');
 };
