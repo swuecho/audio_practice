@@ -31,7 +31,11 @@ def upload_audio(request):
                     ],
                 }
             )
-
+@api_view(['DELETE'])
+def delete_audio(request, file_id):
+    audio_file = get_object_or_404(AudioFile, id=file_id, user=request.user)
+    audio_file.delete()
+    return Response(status=204)
 
 @api_view()
 def get_audio_files(request):

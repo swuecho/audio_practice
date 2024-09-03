@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen flex flex-col">
+  <div class="h-screen flex flex-col p-40">
     <header class="m-4 p-4">
       <h1 class="font-bold mb-4">Add Audio</h1>
       <div class="mt-20 ml-20">
@@ -15,7 +15,7 @@
     </header>
     <main class="flex-grow overflow-hidden">
       <div ref="audioListContainer" class="h-full overflow-y-auto p-4">
-        <AudioFileList :audio-files="audioFiles" />
+        <AudioFileList :audio-files="audioFiles"  @file-deleted="refreshAudioFiles" />
       </div>
     </main>
   </div>
