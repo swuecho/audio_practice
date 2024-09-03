@@ -22,7 +22,7 @@ const props = defineProps({
 const emit = defineEmits(['file-deleted']);
 
 const onFileDeleted = () => {
-        console.log('file deleted emited from AudioFileList')
+  console.log('file deleted emited from AudioFileList')
   emit('file-deleted');
 };
 

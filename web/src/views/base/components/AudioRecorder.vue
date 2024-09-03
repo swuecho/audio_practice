@@ -3,10 +3,8 @@
                 <n-button @click="requestPermission" v-if="!permissionGranted">Allow Microphone Access</n-button>
                 <template v-else>
                         <div>
-                                <div v-if="isRecording" class="recording-indicator">
-                                        <i class="i-fe:loader" />
-                                </div>
-                                <div v-else>
+                                
+                                <div v-if="!isRecording">
                                         <audio v-if="audioUrl" :src="audioUrl" controls></audio>
                                 </div>
                                 <n-input v-model:value="customFileName" placeholder="Enter file name (optional)" />
@@ -18,8 +16,15 @@
                                         </n-button>
                                         <n-button @click="stopRecording" :disabled="!isRecording && !isPaused">Stop
                                                 Recording</n-button>
-                                        <n-button @click="uploadRecording" :disabled="!audioUrl">Upload
-                                                Recording</n-button>
+                                        <n-button @click="uploadRecording" :disabled="!audioUrl || isUploading">
+                                                {{ isUploading ? 'Uploading...' : 'Upload Recording' }}
+                                        </n-button>
+                                </div>
+                                <div v-if="isUploading" class="uploading-indicator">
+                                        <i class="i-fe:loader" /> Uploading...
+                                </div>
+                                <div v-if="isRecording" class="recording-indicator">
+                                        <i class="i-fe:loader" /> Recording...
                                 </div>
                         </div>
 
@@ -41,6 +46,7 @@ let audioChunks = [];
 const customFileName = ref('');
 const isPaused = ref(false);
 let mediaStream = null;
+const isUploading = ref(false);
 
 const emit = defineEmits(['recording-uploaded']);
 
@@ -126,6 +132,7 @@ const uploadRecording = async () => {
         if (!audioUrl.value) return;
 
         try {
+                isUploading.value = true;
                 const response = await fetch(audioUrl.value);
                 const blob = await response.blob();
                 const fileName = customFileName.value
@@ -137,6 +144,8 @@ const uploadRecording = async () => {
         } catch (error) {
                 console.error('Error uploading recording:', error);
                 errorMessage.value = 'Failed to upload recording. Please try again.';
+        } finally {
+                isUploading.value = false;
         }
 };
 
@@ -171,12 +180,7 @@ onMounted(() => {
         margin-top: 10px;
 }
 
-.recording-indicator {
-        color: #ff4136;
-        font-size: 24px;
-        margin-top: 10px;
-        animation: blink 1s infinite;
-}
+
 
 @keyframes blink {
         0% {
@@ -190,5 +194,37 @@ onMounted(() => {
         100% {
                 opacity: 1;
         }
+}
+
+.uploading-indicator {
+        color: #2196f3;
+        font-size: 18px;
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+}
+.recording-indicator {
+        color: #ff4136;
+        font-size: 18px;
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+}
+
+.uploading-indicator i {
+        margin-right: 8px;
+        animation: spin 1s linear infinite;
+}
+
+.recording-indicator i {
+        margin-right: 8px;
+        animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
 }
 </style>

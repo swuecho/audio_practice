@@ -15,7 +15,7 @@
     </header>
     <main class="flex-grow overflow-hidden">
       <div ref="audioListContainer" class="h-full overflow-y-auto p-4">
-        <AudioFileList :audio-files="audioFiles"  @file-deleted="refreshAudioFiles" />
+        <AudioFileList :audio-files="audioFiles" @file-deleted="refreshAudioFiles" />
       </div>
     </main>
   </div>
@@ -32,10 +32,11 @@ const audioFiles = ref([]);
 
 const fetchAudioFiles = async () => {
   const response = await api.getAudioFiles();
-  audioFiles.value = response;
+  audioFiles.value = [...response];
 };
 
 const refreshAudioFiles = () => {
+  console.log('refreshAudioFiles')
   fetchAudioFiles();
 };
 
