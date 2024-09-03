@@ -1,7 +1,7 @@
 {
-  "name": "vue-naive-admin",
+  "name": "audio-practice",
   "private": true,
-  "version": "2.0.0",
+  "version": "3.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -17,7 +17,7 @@
     "@tiptap/starter-kit": "^2.5.9",
     "@tiptap/vue-3": "^2.5.9",
     "@vueuse/core": "^10.9.0",
-    "axios": "^1.6.7",
+    "axios": ">=1.7.4",
     "dayjs": "^1.11.10",
     "echarts": "^5.5.0",
     "lodash-es": "^4.17.21",
@@ -30,8 +30,8 @@
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
-    "@iconify/json": "^2.2.188",
-    "@iconify/utils": "^2.1.22",
+    "@iconify/json": "^2.2.243",
+    "@iconify/utils": "^2.1.32",
     "@unocss/eslint-config": "^0.58.5",
     "@unocss/preset-rem-to-px": "^0.58.5",
     "@vitejs/plugin-vue": "^5.0.4",
