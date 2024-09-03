@@ -10,7 +10,7 @@ import api from '../services/api';
 const emit = defineEmits(['file-uploaded']);
 
 const customRequest = ({ file, onFinish, onError }) => {
-        api.uploadAudio(file.file)
+        api.uploadAudio(file.file, file.name)
                 .then(() => {
                         onFinish();
                         emit('file-uploaded');

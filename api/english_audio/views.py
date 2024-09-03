@@ -5,9 +5,8 @@ from .models import AudioChunk, AudioFile, AudioTranscript
 from .utils import split_audio_file
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-
 from django.shortcuts import get_object_or_404
-
+from datetime import datetime  # Add this import
 
 @api_view(["POST"])
 def upload_audio(request):
@@ -15,8 +14,13 @@ def upload_audio(request):
         audio_file = request.FILES.get("file")
         # saved = default_storage.save(audio_file.name, audio_file)
         if audio_file:
+            audio_file_name = audio_file.name
+            print(audio_file_name)
+            if audio_file_name == "blob":
+                audio_file_name = f"recording-{datetime.now().strftime('%Y-%m-%d-%H-%M-%S')}.wav"
+            print(audio_file_name)
             audio = AudioFile.objects.create(
-                title=audio_file.name, file=audio_file, user=request.user
+                title=audio_file_name, file=audio_file, user=request.user
             )
             chunks = split_audio_file(audio, user=request.user)
             return Response(
