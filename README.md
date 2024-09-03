@@ -4,16 +4,16 @@
 
 ```sh
 cd web
-npm run build
-
-# copy to backend server
-cd ..
-mkdir -p ./api/staticfiles
-cp -r ./web/dist/* ./api/staticfiles/
+npm run dev
 ```
 
 # backend
 
 ```
-python manage.py runserver 0.0.0.0:8000
+# add env var
+# export DEBUG=1
+# export DATABASE_URL=postgresql://xxxx
+# export SILICIONFLOW_API_KEY=sk-xxx
+cd api
+make dev
 ```
