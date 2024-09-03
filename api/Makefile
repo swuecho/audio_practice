@@ -1,4 +1,4 @@
-version=0.1.28
+version=0.1.29
 local_registry=192.168.0.100:5555
 aliyun_registry_bestqa=registry.cn-shanghai.aliyuncs.com/bestqa
 github_pkg_registry_surveyresearch=docker.pkg.github.com/swuecho/surveyresearch
@@ -24,7 +24,7 @@ tag:
 	git tag release-v$(version)
 	git push origin tag release-v$(version)
 
-build:
+build: static
 	docker build  -t $(local_registry)/admin_backend:$(version) -f Dockerfile .
 push:
 	docker push $(local_registry)/admin_backend:$(version)
