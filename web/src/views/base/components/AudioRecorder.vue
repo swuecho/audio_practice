@@ -9,9 +9,15 @@
                                 <div v-else>
                                         <audio v-if="audioUrl" :src="audioUrl" controls></audio>
                                 </div>
-                                <n-button @click="startRecording" :disabled="isRecording">Start Recording</n-button>
-                                <n-button @click="stopRecording" :disabled="!isRecording">Stop Recording</n-button>
-                                <n-button @click="uploadRecording" :disabled="!audioUrl">Upload Recording</n-button>
+                                <n-input v-model:value="customFileName" placeholder="Enter file name (optional)" />
+                                <div class="flex gap-4 justify-center mt-8">
+                                        <n-button @click="startRecording" :disabled="isRecording">Start
+                                                Recording</n-button>
+                                        <n-button @click="stopRecording" :disabled="!isRecording">Stop
+                                                Recording</n-button>
+                                        <n-button @click="uploadRecording" :disabled="!audioUrl">Upload
+                                                Recording</n-button>
+                                </div>
                         </div>
 
                 </template>
@@ -29,6 +35,7 @@ const permissionGranted = ref(false);
 const errorMessage = ref('');
 let mediaRecorder = null;
 let audioChunks = [];
+const customFileName = ref('');
 
 const emit = defineEmits(['recording-uploaded']);
 
@@ -97,9 +104,12 @@ const uploadRecording = async () => {
         try {
                 const response = await fetch(audioUrl.value);
                 const blob = await response.blob();
-                const fileName = `recording-${Date.now()}.wav`;
+                const fileName = customFileName.value
+                        ? `${customFileName.value}.wav`
+                        : `recording-${Date.now()}.wav`;
                 await api.uploadAudio(blob, fileName);
                 emit('recording-uploaded');
+                customFileName.value = ''; // Reset the input after successful upload
         } catch (error) {
                 console.error('Error uploading recording:', error);
                 errorMessage.value = 'Failed to upload recording. Please try again.';
