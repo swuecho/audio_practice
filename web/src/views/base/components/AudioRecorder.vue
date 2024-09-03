@@ -11,9 +11,12 @@
                                 </div>
                                 <n-input v-model:value="customFileName" placeholder="Enter file name (optional)" />
                                 <div class="flex gap-4 justify-center mt-8">
-                                        <n-button @click="startRecording" :disabled="isRecording">Start
+                                        <n-button @click="startRecording" :disabled="isRecording || isPaused">Start
                                                 Recording</n-button>
-                                        <n-button @click="stopRecording" :disabled="!isRecording">Stop
+                                        <n-button @click="pauseResumeRecording" :disabled="!isRecording && !isPaused">
+                                                {{ isPaused ? 'Resume' : 'Pause' }}
+                                        </n-button>
+                                        <n-button @click="stopRecording" :disabled="!isRecording && !isPaused">Stop
                                                 Recording</n-button>
                                         <n-button @click="uploadRecording" :disabled="!audioUrl">Upload
                                                 Recording</n-button>
@@ -36,6 +39,8 @@ const errorMessage = ref('');
 let mediaRecorder = null;
 let audioChunks = [];
 const customFileName = ref('');
+const isPaused = ref(false);
+let mediaStream = null;
 
 const emit = defineEmits(['recording-uploaded']);
 
@@ -70,8 +75,8 @@ const requestPermission = async () => {
 const startRecording = async () => {
         try {
                 errorMessage.value = '';
-                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-                mediaRecorder = new MediaRecorder(stream);
+                mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                mediaRecorder = new MediaRecorder(mediaStream);
                 audioChunks = [];
 
                 mediaRecorder.ondataavailable = (event) => {
@@ -85,9 +90,24 @@ const startRecording = async () => {
 
                 mediaRecorder.start();
                 isRecording.value = true;
+                isPaused.value = false;
         } catch (error) {
                 console.error('Error starting recording:', error);
                 handleError(error);
+        }
+};
+
+const pauseResumeRecording = () => {
+        if (!mediaRecorder) return;
+
+        if (isPaused.value) {
+                mediaRecorder.resume();
+                isPaused.value = false;
+                isRecording.value = true;
+        } else {
+                mediaRecorder.pause();
+                isPaused.value = true;
+                isRecording.value = false;
         }
 };
 
@@ -95,6 +115,10 @@ const stopRecording = () => {
         if (mediaRecorder) {
                 mediaRecorder.stop();
                 isRecording.value = false;
+                isPaused.value = false;
+                if (mediaStream) {
+                        mediaStream.getTracks().forEach(track => track.stop());
+                }
         }
 };
 
