@@ -36,6 +36,9 @@ import { useCssVar } from '@vueuse/core'
 import { kebabCase } from 'lodash-es'
 import { useAppStore, useTabStore } from '@/store'
 
+// Log the commit hash
+console.log('Current commit hash:', __COMMIT_HASH__)
+
 const layouts = new Map()
 function getLayout(name) {
   // 利用map将加载过的layout缓存起来，防止重新加载layout导致页面闪烁
