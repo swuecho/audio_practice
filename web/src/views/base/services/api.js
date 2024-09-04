@@ -13,6 +13,9 @@ export default {
         async getAudioFiles() {
                 return await request.get(`/audio-files/`);
         },
+        async updateAudioFileTitle(fileId, newTitle) {
+                return await request.patch(`/audio/file/${fileId}`, { title: newTitle })
+        },
         async deleteAudioFile(fileId) {
                 return await request.delete(`/audio/file/${fileId}`)
         },

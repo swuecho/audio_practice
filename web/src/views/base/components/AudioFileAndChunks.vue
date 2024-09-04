@@ -1,6 +1,9 @@
 <template>
         <n-thing :title="audioFile.title">
                 <template #header-extra>
+                        <n-button @click="showEditDialog" size="small" class="mr-2">
+                                <i class="i-fe:edit-2"></i>
+                        </n-button>
                         <n-button @click="confirmDelete" size="small" class="mr-2">
                                 <i class="i-fe:trash"></i>
                         </n-button>
@@ -41,18 +44,24 @@
                         </div>
                 </template>
         </n-thing>
+  <EditAudioFileDialog
+    v-model:show="showDialog"
+    title="Edit Audio File Title"
+    :initial-title="audioFile.title"
+    @save="updateAudioFileTitle"
+  />
 </template>
 
 
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useDialog } from 'naive-ui'
+import { ref, h } from 'vue'
+import { useDialog, useMessage } from 'naive-ui'
 import AudioPlayer from './AudioPlayer.vue';
+import EditAudioFileDialog from './EditAudioFileDialog.vue';
 import api from '../services/api';
 
-const emit = defineEmits(['file-deleted']);
-
+const emit = defineEmits(['file-deleted', 'file-updated']);
 
 interface AudioFile {
         id: number
@@ -78,6 +87,23 @@ const formatTime = (seconds) => {
 };
 
 const dialog = useDialog()
+const message = useMessage()
+const showDialog = ref(false)
+
+const showEditDialog = () => {
+        showDialog.value = true
+}
+
+const updateAudioFileTitle = async (newTitle: string) => {
+        try {
+                await api.updateAudioFileTitle(props.audioFile.id, newTitle)
+                emit('file-updated', { id: props.audioFile.id, title: newTitle })
+                message.success('Title updated successfully')
+        } catch (error) {
+                console.error('Error updating audio file title:', error)
+                message.error('Failed to update title')
+        }
+}
 
 const confirmDelete = () => {
         dialog.warning({
