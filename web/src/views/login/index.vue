@@ -226,6 +226,10 @@ async function handleRegister() {
   if (password !== confirmPassword) {
     return $message.warning('两次输入的密码不一致')
   }
+  // add password length check
+  if (password.length < 6) {
+    return $message.warning('密码长度不能小于6位')
+  }
   // Implement registration logic here
   try {
     loading.value = true
