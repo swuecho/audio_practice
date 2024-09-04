@@ -73,7 +73,7 @@ import StarterKit from '@tiptap/starter-kit'
 import Highlight from '@tiptap/extension-highlight'
 import Typography from '@tiptap/extension-typography'
 import { request } from '@/utils'
-import Icon from './Icon.vue';
+import Icon from '@/components/common/Icon.vue';
 
 import { debounce } from 'lodash'
 
