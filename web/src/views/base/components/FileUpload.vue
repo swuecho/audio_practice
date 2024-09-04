@@ -14,9 +14,9 @@ import api from '../services/api';
 const emit = defineEmits(['file-uploaded']);
 const fileName = ref('');
 
-const customRequest = ({ file, onFinish, onError }) => {
+const customRequest = async ({ file, onFinish, onError }) => {
     const uploadName = fileName.value || file.name;
-    api.uploadAudio(file.file, uploadName)
+    await api.uploadAudio(file.file, uploadName)
         .then(() => {
             onFinish();
             emit('file-uploaded');
