@@ -33,7 +33,7 @@ python manage.py createsuperuser
 python manage.py loaddata data/permission.json 
 python manage.py loaddata data/role.json 
 python manage.py loaddata data/user_roles_role.json
-python manage.py loaddata data/role_permissions.json
+python manage.py loaddata data/role_permission.json
 ```
 
 
