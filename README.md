@@ -3,6 +3,12 @@
 
 ## init data
 
+0. init table
+
+```
+python manage.py migrate
+```
+
 1. create admin user
 
 ```bash
