@@ -18,7 +18,7 @@ def reset_password(email, new_password):
     except User.DoesNotExist:
         print(f"User with email {email} not found")
 
-if __name__ == "__main__":
+def run():
     email = input("Enter user email: ")
     new_password = input("Enter new password: ")
     reset_password(email, new_password)
