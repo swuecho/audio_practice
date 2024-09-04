@@ -14,6 +14,7 @@ export default defineComponent({
 
   computed: {
     icon() {
+      //@ts-ignore
       return defineAsyncComponent(() => import(`../../assets/icons/editor/${this.name}.svg`));
     },
   },
