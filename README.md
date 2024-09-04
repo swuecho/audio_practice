@@ -59,3 +59,9 @@ make dev
 
 cd api
 python manage.py runscript reset_password
+
+## Credit
+
+1. https://english-practice-app-nine.vercel.app/
+2. https://github.com/ZuodaoTech/everyone-can-use-english
+
