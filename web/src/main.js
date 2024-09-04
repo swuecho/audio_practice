@@ -19,8 +19,12 @@ import { setupStore } from './store'
 import { setupNaiveDiscreteApi } from './utils'
 import { setupDirectives } from './directives'
 
+import { VueQueryPlugin } from '@tanstack/vue-query'
+
+
 async function bootstrap() {
   const app = createApp(App)
+  app.use(VueQueryPlugin)
   setupStore(app)
   setupNaiveDiscreteApi()
   setupDirectives(app)
