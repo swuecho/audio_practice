@@ -8,6 +8,7 @@
 
 import path from 'path'
 import { defineConfig, loadEnv } from 'vite'
+import { execSync } from 'child_process'
 import Vue from '@vitejs/plugin-vue'
 import Unocss from 'unocss/vite'
 import AutoImport from 'unplugin-auto-import/vite'
@@ -18,12 +19,26 @@ import removeNoMatch from 'vite-plugin-router-warn'
 import svgLoader from 'vite-svg-loader';
 import { pluginPagePathes, pluginIcons } from './build/plugin-isme'
 
+// Get the current Git commit hash
+const getGitCommitHash = () => {
+  try {
+    return execSync('git rev-parse --short HEAD').toString().trim()
+  } catch (error) {
+    console.error('Failed to get Git commit hash:', error)
+    return 'unknown'
+  }
+}
 
 export default defineConfig(({ command, mode }) => {
   const isBuild = command === 'build'
   const viteEnv = loadEnv(mode, process.cwd())
   const { VITE_TITLE, VITE_PUBLIC_PATH, VITE_PROXY_TARGET, VITE_PROXY_TARGET_MEDIA } = viteEnv
-  console.log(VITE_PROXY_TARGET)
+  const commitHash = getGitCommitHash()
+  
+  console.log('Current Git commit hash:', commitHash)
+  console.log('Vite configuration mode:', mode)
+  console.log('VITE_PROXY_TARGET:', VITE_PROXY_TARGET)
+
   return {
     base: VITE_PUBLIC_PATH || '/',
     plugins: [
@@ -109,6 +124,9 @@ export default defineConfig(({ command, mode }) => {
     },
     build: {
       chunkSizeWarningLimit: 1024, // chunk 大小警告的限制（单位kb）
+    },
+    define: {
+      __COMMIT_HASH__: JSON.stringify(commitHash),
     },
   }
 })

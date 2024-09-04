@@ -172,6 +172,7 @@ const uploadRecording = async () => {
                 errorMessage.value = 'Failed to upload recording. Please try again.';
         } finally {
                 isUploading.value = false;
+                audioUrl.value = null;
         }
 };
 
