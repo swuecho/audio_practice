@@ -30,6 +30,15 @@ def test_user_creation_with_password():
     assert saved_user is not None
     assert saved_user.email == 'test@example.com'
     
-    
+@pytest.mark.django_db
+def check_superuser_role():
+    """test if the superuser has the superuser role"""
+    superuser = User.objects.get(username='admin')
+    assert superuser is not None
+    roles = superuser.roles.all()
+    assert roles.count() == 3
+    assert roles[0].name == 'SUPER_ADMIN'
+    assert roles[1].name == 'ADMIN'
+    assert roles[2].name == 'OPERATOR'
     
 
