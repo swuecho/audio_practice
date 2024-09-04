@@ -1,4 +1,5 @@
-from django.contrib.auth.models import update_last_login
+from django.contrib.auth.models import update_last_login, User
+from admin_backend.models import Role, UserRolesRole
 from django.db.models import Max, Sum
 from django.http import Http404
 from rest_framework import generics, permissions, status, viewsets
@@ -27,7 +28,41 @@ class MyTokenObtainPairView(TokenObtainPairView):
         return Response(
             {"data": serializer.validated_data},
         )
+    
+class RegiserAndObtainPairView(MyTokenObtainPairView):
+    def post(self, request, *args, **kwargs):
+        username = request.data.get('username')
+        password = request.data.get('password')
 
+        if not username or not password:
+            return Response({'error': 'Both username and password are required'}, 
+                            status=status.HTTP_400_BAD_REQUEST)
+
+        # Check if user already exists
+        if User.objects.filter(username=username).exists():
+            return Response({'error': 'Username already exists'}, 
+                            status=status.HTTP_400_BAD_REQUEST)
+
+        # Create new user
+        user = User.objects.create_user(username=username, password=password)
+        user.email = username
+        user.save()
+        # find OPERATOR role
+        role = Role.objects.get(code='OPERATOR')
+        # assign role to user
+        user_role = UserRolesRole.objects.create(user=user, role=role)
+        user_role.save()
+        
+
+        # Use the parent class method to get the token
+        response = super().post(request, *args, **kwargs)
+
+        if response.status_code == status.HTTP_200_OK:
+            return Response(
+                {"data": response.data.get("data")},
+                status=status.HTTP_201_CREATED,
+            )
+        return response
 
 class SwitchRoleView(APIView):
     def post(self, request, *args, **kwargs):

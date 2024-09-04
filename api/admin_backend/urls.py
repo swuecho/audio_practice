@@ -20,7 +20,7 @@ from rest_framework import routers
 from rest_framework_simplejwt.views import TokenRefreshView, TokenVerifyView
 from django.conf.urls.static import static
 from admin_backend import settings, views_api, views_user_role_permission
-from admin_backend.views import MyTokenObtainPairView, SwitchRoleView
+from admin_backend.views import MyTokenObtainPairView, SwitchRoleView, RegiserAndObtainPairView
 from .swagger_view import schema_view
 from .ninja import api as ninja_api
 
@@ -102,6 +102,7 @@ urlpatterns = [
     # vue admin serve
     path("api/auth/switch_role/", SwitchRoleView.as_view(), name="switch-role"),
     path("api/auth/login", MyTokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path("api/auth/register", RegiserAndObtainPairView.as_view(), name="register"),
     path(
         "api/auth/logout", views_user_role_permission.logout, name="token_obtain_pair"
     ),
