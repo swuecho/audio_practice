@@ -48,6 +48,20 @@ const isPaused = ref(false);
 let mediaStream = null;
 const isUploading = ref(false);
 
+const recordingStartTime = ref(null);
+const recordingTime = ref(0);
+
+onMounted(() => {
+        // Check if permission is already granted
+        navigator.permissions.query({ name: 'microphone' }).then((result) => {
+                if (result.state === 'granted') {
+                        permissionGranted.value = true;
+                }
+        }).catch(error => {
+                console.error('Error querying microphone permission:', error);
+        });
+});
+
 const emit = defineEmits(['recording-uploaded']);
 
 const checkBrowserSupport = () => {
@@ -179,19 +193,7 @@ const formattedRecordingTime = computed(() => {
         return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 });
 
-const recordingStartTime = ref(null);
-const recordingTime = ref(0);
 
-onMounted(() => {
-        // Check if permission is already granted
-        navigator.permissions.query({ name: 'microphone' }).then((result) => {
-                if (result.state === 'granted') {
-                        permissionGranted.value = true;
-                }
-        }).catch(error => {
-                console.error('Error querying microphone permission:', error);
-        });
-});
 </script>
 
 <style scoped>
