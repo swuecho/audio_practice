@@ -43,7 +43,7 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: "3.11"
-        
+
     - name: Setup FFmpeg
       uses: AnimMouse/setup-ffmpeg@v1
 
@@ -71,7 +71,7 @@ jobs:
         python manage.py loaddata data/permission.json 
         python manage.py loaddata data/role.json 
         python manage.py loaddata data/user_roles_role.json
-        python manage.py loaddata data/role_permissions.json
+        python manage.py loaddata data/role_permission.json
         pytest
       env:
         DATABASE_URL: postgresql://postgres:postgres@localhost:5432/postgres
