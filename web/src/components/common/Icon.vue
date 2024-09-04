@@ -14,7 +14,7 @@ export default defineComponent({
 
   computed: {
     icon() {
-      return defineAsyncComponent(() => import(`../../../assets/icons/editor/${this.name}.svg`));
+      return defineAsyncComponent(() => import(`../../assets/icons/editor/${this.name}.svg`));
     },
   },
 });
