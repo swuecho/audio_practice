@@ -13,6 +13,7 @@
 0. init table
 
 ```
+#  export DATABASE_URL=postgresql://xxxx
 python manage.py migrate
 ```
 
