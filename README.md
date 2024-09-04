@@ -12,6 +12,7 @@ python manage.py migrate
 1. create admin user
 
 ```bash
+cd api
 python manage.py createsuperuser
 ```
 
