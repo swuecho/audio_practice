@@ -24,7 +24,7 @@
                                         <i class="i-fe:loader" /> Uploading...
                                 </div>
                                 <div v-if="isRecording" class="recording-indicator">
-                                        <i class="i-fe:loader" /> Recording...
+                                        <i class="i-fe:loader" /> Recording... {{ formattedRecordingTime }}
                                 </div>
                         </div>
 
@@ -34,7 +34,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import api from '../services/api';
 
 const isRecording = ref(false);
@@ -97,9 +97,18 @@ const startRecording = async () => {
                 mediaRecorder.start();
                 isRecording.value = true;
                 isPaused.value = false;
+                recordingStartTime.value = Date.now();
+                updateRecordingTime();
         } catch (error) {
                 console.error('Error starting recording:', error);
                 handleError(error);
+        }
+};
+
+const updateRecordingTime = () => {
+        if (isRecording.value && !isPaused.value) {
+                recordingTime.value = Math.floor((Date.now() - recordingStartTime.value) / 1000);
+                setTimeout(updateRecordingTime, 1000);
         }
 };
 
@@ -110,6 +119,8 @@ const pauseResumeRecording = () => {
                 mediaRecorder.resume();
                 isPaused.value = false;
                 isRecording.value = true;
+                recordingStartTime.value = Date.now() - recordingTime.value * 1000;
+                updateRecordingTime();
         } else {
                 mediaRecorder.pause();
                 isPaused.value = true;
@@ -122,6 +133,7 @@ const stopRecording = () => {
                 mediaRecorder.stop();
                 isRecording.value = false;
                 isPaused.value = false;
+                recordingTime.value = 0;
                 if (mediaStream) {
                         mediaStream.getTracks().forEach(track => track.stop());
                 }
@@ -161,6 +173,14 @@ const handleError = (error) => {
         }
 };
 
+const formattedRecordingTime = computed(() => {
+        const minutes = Math.floor(recordingTime.value / 60);
+        const seconds = recordingTime.value % 60;
+        return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+});
+
+const recordingStartTime = ref(null);
+const recordingTime = ref(0);
 
 onMounted(() => {
         // Check if permission is already granted
@@ -179,8 +199,6 @@ onMounted(() => {
         color: red;
         margin-top: 10px;
 }
-
-
 
 @keyframes blink {
         0% {
