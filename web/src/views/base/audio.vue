@@ -15,7 +15,7 @@
     </header>
     <main class="flex-grow overflow-hidden">
       <div ref="audioListContainer" class="h-full overflow-y-auto p-4">
-        <AudioFileList :audio-files="audioFiles" @file-deleted="refreshAudioFiles" />
+        <AudioFileList :audio-files="audioFiles" @file-deleted="refreshAudioFiles" @file-updated="refreshAudioFiles" />
       </div>
     </main>
   </div>
