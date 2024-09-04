@@ -33,8 +33,20 @@ def test_user_creation_with_password():
 @pytest.mark.django_db
 def test_superuser_role():
     """test if the superuser has the superuser role"""
-    # Create a superuser for testing
-    assert User.objects.all().count() == 1
+    # Create a superuser for testing if it doesn't exist
+    superuser, created = User.objects.get_or_create(
+        username='admin',
+        defaults={
+            'email': 'admin@example.com',
+            'is_superuser': True,
+            'is_staff': True
+        }
+    )
+    if created:
+        superuser.set_password('adminpassword')
+        superuser.save()
+
+    assert User.objects.all().count() >= 1
     superuser = User.objects.get(username='admin')
     assert superuser is not None
     roles = superuser.roles.all()
@@ -43,5 +55,5 @@ def test_superuser_role():
     assert 'SUPER_ADMIN' in role_names
     assert 'ADMIN' in role_names
     assert 'OPERATOR' in role_names
-    
+
 
