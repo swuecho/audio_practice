@@ -115,10 +115,12 @@ WSGI_APPLICATION = "admin_backend.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = dict(
-    default=dj_database_url.config(conn_max_age=500),
-    admin=dj_database_url.config(conn_max_age=500),
-)
+DATABASES = {
+    'default': dj_database_url.config(
+        default='sqlite:///' + str(BASE_DIR / 'db.sqlite3'),
+        conn_max_age=500
+    )
+}
 
 
 # Password validation

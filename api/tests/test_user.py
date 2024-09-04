@@ -14,3 +14,20 @@ def test_user_creation():
     new_user = User.objects.create(email='test@example.com', first_name='Test', last_name='User')
     
     assert new_user is not None  # Assert that an instance of User was created successfully.
+
+
+@pytest.mark.django_db
+def test_user_creation_with_password():
+    """Test if creating a new User instance with a password is successful."""
+    
+    # Create a new user with a password and save it to the database
+    new_user = User.objects.create(username='test@example.com',password='testpassword')
+    
+    assert new_user is not None  # Assert that an instance of User was created successfully.
+    assert new_user.check_password('testpassword')  # Assert that the password is correct.
+    new_user.save()
+    
+    
+    
+    
+
