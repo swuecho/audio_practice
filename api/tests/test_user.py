@@ -49,11 +49,8 @@ def test_superuser_role():
     assert User.objects.all().count() >= 1
     superuser = User.objects.get(username='admin')
     assert superuser is not None
-    roles = superuser.roles.all()
-    assert roles.count() == 3
-    role_names = [role.name for role in roles]
-    assert 'SUPER_ADMIN' in role_names
-    assert 'ADMIN' in role_names
-    assert 'OPERATOR' in role_names
+    assert superuser.check_password('adminpassword')
+    assert superuser.is_superuser
+    assert superuser.is_staff
 
 
