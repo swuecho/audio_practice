@@ -47,8 +47,8 @@ jobs:
     - name: Install dependencies
       working-directory: ./api
       run: |
-        RUN apt update
-        RUN apt install -y ffmpeg
+        apt update
+        apt install -y ffmpeg
         python -m pip install --upgrade pip
         pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
