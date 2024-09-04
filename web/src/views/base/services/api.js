@@ -1,26 +1,26 @@
 import { request } from "@/utils"
 export default {
-        uploadAudio(file, fileName) {
+        async uploadAudio(file, fileName) {
                 const formData = new FormData();
                 formData.append('file', file, fileName);
-                return request.post(`/upload/`, formData, {
+                return await request.post(`/upload/`, formData, {
                         headers: {
                                 'Content-Type': 'multipart/form-data'
                         }
                 }
                 );
         },
-        getAudioFiles() {
-                return request.get(`/audio-files/`);
+        async getAudioFiles() {
+                return await request.get(`/audio-files/`);
         },
         async deleteAudioFile(fileId) {
-                await request.delete(`/audio/file/${fileId}`)
+                return await request.delete(`/audio/file/${fileId}`)
         },
-        getAudioChunk(id) {
-                return request.get(`/audio/chunk/${id}/`)
+        async getAudioChunk(id) {
+                return await request.get(`/audio/chunk/${id}/`)
         },
 
         async audioChunkTranscript(id) {
-                return request.post(`/audio/chunk/transcript/${id}/`)
+                return await request.post(`/audio/chunk/transcript/${id}/`)
         }
 };
