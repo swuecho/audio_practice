@@ -9,7 +9,7 @@
                                 </div>
                                 <n-input v-model:value="customFileName" placeholder="Enter file name (optional)" />
                                 <div class="flex gap-4 justify-center mt-8">
-                                        <n-button @click="startRecording" :disabled="isRecording || isPaused">Start
+                                        <n-button @click="startRecording" :disabled="isRecording || isPaused || isUploading">Start
                                                 Recording</n-button>
                                         <n-button @click="pauseResumeRecording" :disabled="!isRecording && !isPaused">
                                                 {{ isPaused ? 'Resume' : 'Pause' }}
