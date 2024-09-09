@@ -13,7 +13,7 @@
                 </template>
                 <template #description>
                         <div v-show="!collapsed">
-                                <div v-for="chunk in audioFile.chunks" :key="chunk.id">
+                                <div v-for="(chunk, index) in audioFile.chunks" :key="chunk.id">
                                         <n-card class="mb-4">
                                                 <div class="flex justify-between">
                                                         <div class="flex items-center">
@@ -25,7 +25,7 @@
                                                                 </h2>
                                                         </div>
                                                         <div class="flex items-center">
-                                                                <router-link :to="`/base/practice/${chunk.id}`"
+                                                                <router-link :to="`/base/practice/${chunk.id}?index=${index}&total=${audioFile.chunks.length}`"
                                                                         class="practice-link">
                                                                         <h2> <i class="i-fe:arrow-up-right"></i>
                                                                         </h2>
